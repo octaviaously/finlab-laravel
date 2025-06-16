@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.contact-button {
+    transition: color 0.2s ease-in-out;
+}
+
+/* Pop-up Styling */
+#auth-popup {
+    z-index: 1000;
+}
+
+#auth-popup .bg-white {
+    transform: translateY(-10px);
+    transition: transform 0.3s ease-in-out;
+}
