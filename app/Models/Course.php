@@ -8,10 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
-    protected $fillable = ['judul', 'slug', 'deskripsi', 'tingkat_kesulitan', 'jenis_kursus', 'link_video'];
 
-    public function quiz()
+    protected $fillable = [
+        'judul', 'slug', 'link_video', 'durasi', 'jenis_kursus', 'tingkat_kesulitan', 'deskripsi'
+    ];
+
+    public function quizzes()
     {
-        return $this->hasOne(Quiz::class);
+        return $this->hasMany(Quiz::class);
     }
 }

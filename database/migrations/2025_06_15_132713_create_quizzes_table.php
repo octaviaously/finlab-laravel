@@ -9,15 +9,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quizzes', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
             $table->id();
-            $table->unsignedBigInteger('course_id');
-            $table->string('slug')->unique();
-            $table->text('soal');
-            $table->unsignedBigInteger('jawaban_benar')->nullable(); // Kolom tanpa constraint dulu
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->string('question');
+            $table->string('option_a');
+            $table->string('option_b');
+            $table->string('option_c');
+            $table->string('option_d');
+            $table->string('correct_answer'); // Menyimpan opsi jawaban yang benar (a, b, c, atau d)
             $table->timestamps();
-
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
         });
     }
 

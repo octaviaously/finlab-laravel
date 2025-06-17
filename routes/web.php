@@ -1,4 +1,5 @@
 <?php
+
 use App\Models\Course;
 use App\Models\Artikel;
 use Illuminate\Support\Facades\Route;
@@ -6,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\QuizController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\ArtikelController;
+use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\QuizOptionController;
 
 Route::get('/', function () {
@@ -49,7 +51,9 @@ Route::middleware(['auth:web'])->group(function () {
         $course = Course::where('slug', $slug)->firstOrFail();
         return view('course', compact('course'));
     })->name('course.show');
-    
+
+    Route::get('/courses/{slug}/feedback', [FeedbackController::class, 'showFeedback'])->name('feedback.show');
+    Route::post('/courses/{slug}/feedback', [FeedbackController::class, 'submitFeedback'])->name('feedback.submit');
 
     Route::get('/budget', function () {
         return view('budget');

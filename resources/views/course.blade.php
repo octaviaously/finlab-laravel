@@ -28,7 +28,7 @@
                 {!! nl2br(e($course->deskripsi)) !!}
             </div>
             <div class="mt-8">
-                <a href="#" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Kerjakan Kuis</a>
+                <a href="{{ route('feedback.show', $course->slug) }}" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Kerjakan Kuis</a>
             </div>
         </article>
 
