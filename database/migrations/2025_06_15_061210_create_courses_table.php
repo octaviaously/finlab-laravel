@@ -13,7 +13,6 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->text('deskripsi');
             $table->enum('tingkat_kesulitan', ['pemula', 'menengah', 'lanjut']);
-            $table->enum('jenis_kursus', ['bayar', 'gratis']);
             $table->string('link_video'); // URL embed YouTube
             $table->timestamps();
         });

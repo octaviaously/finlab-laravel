@@ -29,7 +29,6 @@ class CourseController extends Controller
                 'judul' => 'required|string|max:255',
                 'deskripsi' => 'required|string',
                 'tingkat_kesulitan' => 'required|in:pemula,menengah,lanjut',
-                'jenis_kursus' => 'required|in:bayar,gratis',
                 'link_video' => [
                     'required',
                     'url',
@@ -40,8 +39,6 @@ class CourseController extends Controller
                 'deskripsi.required' => 'Deskripsi wajib diisi.',
                 'tingkat_kesulitan.required' => 'Tingkat kesulitan wajib dipilih.',
                 'tingkat_kesulitan.in' => 'Tingkat kesulitan tidak valid.',
-                'jenis_kursus.required' => 'Jenis kursus wajib dipilih.',
-                'jenis_kursus.in' => 'Jenis kursus tidak valid.',
                 'link_video.required' => 'Link video wajib diisi.',
                 'link_video.url' => 'Link video harus berupa URL valid.',
                 'link_video.regex' => 'Link video harus dari YouTube dengan format yang valid (contoh: https://youtu.be/VIDEO_ID).',
@@ -63,7 +60,6 @@ class CourseController extends Controller
                 'slug' => $slug,
                 'deskripsi' => $request->deskripsi,
                 'tingkat_kesulitan' => $request->tingkat_kesulitan,
-                'jenis_kursus' => $request->jenis_kursus,
                 'link_video' => $request->link_video,
             ]);
 
@@ -88,7 +84,6 @@ class CourseController extends Controller
                 'judul' => 'required|string|max:255',
                 'deskripsi' => 'required|string',
                 'tingkat_kesulitan' => 'required|in:pemula,menengah,lanjut',
-                'jenis_kursus' => 'required|in:bayar,gratis',
                 'link_video' => [
                     'required',
                     'url',
@@ -99,8 +94,6 @@ class CourseController extends Controller
                 'deskripsi.required' => 'Deskripsi wajib diisi.',
                 'tingkat_kesulitan.required' => 'Tingkat kesulitan wajib dipilih.',
                 'tingkat_kesulitan.in' => 'Tingkat kesulitan tidak valid.',
-                'jenis_kursus.required' => 'Jenis kursus wajib dipilih.',
-                'jenis_kursus.in' => 'Jenis kursus tidak valid.',
                 'link_video.required' => 'Link video wajib diisi.',
                 'link_video.url' => 'Link video harus berupa URL valid.',
                 'link_video.regex' => 'Link video harus dari YouTube dengan format yang valid (contoh: https://youtu.be/VIDEO_ID).',
@@ -120,7 +113,6 @@ class CourseController extends Controller
                 'slug' => $slug,
                 'deskripsi' => $request->deskripsi,
                 'tingkat_kesulitan' => $request->tingkat_kesulitan,
-                'jenis_kursus' => $request->jenis_kursus,
                 'link_video' => $request->link_video,
             ]);
 

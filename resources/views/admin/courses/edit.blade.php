@@ -32,17 +32,7 @@
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="mb-4">
-                <label for="jenis_kursus" class="block text-gray-700 font-semibold mb-2">Jenis Kursus</label>
-                <select id="jenis_kursus" name="jenis_kursus" class="w-full border rounded-lg px-4 py-2 @error('jenis_kursus') border-red-500 @enderror" required>
-                    <option value="" disabled>Pilih jenis kursus</option>
-                    <option value="gratis" {{ old('jenis_kursus', $course->jenis_kursus) == 'gratis' ? 'selected' : '' }}>Gratis</option>
-                    <option value="bayar" {{ old('jenis_kursus', $course->jenis_kursus) == 'bayar' ? 'selected' : '' }}>Bayar</option>
-                </select>
-                @error('jenis_kursus')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                @enderror
-            </div>
+
             <div class="mb-4">
                 <label for="link_video" class="block text-gray-700 font-semibold mb-2">Link Video YouTube</label>
                 <input type="url" id="link_video" name="link_video" value="{{ old('link_video', $course->link_video) }}" class="w-full border rounded-lg px-4 py-2 @error('link_video') border-red-500 @enderror" required placeholder="https://youtu.be/VIDEO_ID">

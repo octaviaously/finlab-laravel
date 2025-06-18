@@ -10,7 +10,7 @@ class Course extends Model
     use HasFactory;
 
     protected $fillable = [
-        'judul', 'slug', 'link_video', 'durasi', 'jenis_kursus', 'tingkat_kesulitan', 'deskripsi'
+        'judul', 'slug', 'link_video', 'durasi', 'tingkat_kesulitan', 'deskripsi'
     ];
 
     public function quizzes()

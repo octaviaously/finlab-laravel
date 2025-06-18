@@ -12,4 +12,8 @@ class User extends Authenticatable
     protected $fillable = [
         'username', 'name', 'email', 'password', 'points'
     ];
+    protected $casts = [
+    'completed_quizzes' => 'array',
+];
+
 }

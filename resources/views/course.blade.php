@@ -21,19 +21,32 @@
             </div>
             <div class="mt-6 bg-gray-100 p-4 rounded-lg">
                 <p class="text-gray-600"><strong>Durasi:</strong> {{ $course->durasi ?? 'Tidak tersedia' }}</p>
-                <p class="text-gray-600"><strong>Jenis Kursus:</strong> {{ ucfirst($course->jenis_kursus) }}</p>
                 <p class="text-gray-600"><strong>Tingkat Kesulitan:</strong> {{ ucfirst($course->tingkat_kesulitan) }}</p>
             </div>
             <div class="prose prose-lg max-w-none text-gray-800 mt-6">
                 {!! nl2br(e($course->deskripsi)) !!}
             </div>
             <div class="mt-8">
-                <a href="{{ route('feedback.show', $course->slug) }}" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">Kerjakan Kuis</a>
-            </div>
+    @if ($sudahDikerjakan ?? false)
+        <button class="inline-block bg-gray-400 text-white px-6 py-3 rounded-lg cursor-not-allowed" disabled>
+            Kuis sudah dikerjakan
+        </button>
+    @else
+        <a href="{{ route('feedback.show', $course->slug) }}" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            Kerjakan Kuis
+        </a>
+    @endif
+</div>
         </article>
 
         <div class="mt-10">
             <a href="/courses" class="text-blue-600 hover:text-blue-700 hover:underline text-sm">« Kembali ke daftar kursus</a>
         </div>
     </div>
+    @if (session('success'))
+    <script>
+        alert(@json(session('success')));
+    </script>
+@endif
+
 </x-layout>

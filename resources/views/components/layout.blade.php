@@ -26,7 +26,6 @@
                         <ul class="space-y-2">
                             <li><a href="/artikels" class="hover:text-blue-400">Artikel</a></li>
                             <li><a href="/courses" class="hover:text-blue-400">Kursus Mini</a></li>
-                            <li><a href="/budget" class="hover:text-blue-400">Simulasi Anggaran</a></li>
                         </ul>
                     </div>
                     <div>
@@ -36,7 +35,6 @@
                             <li><a href="/about" class="hover:text-blue-400">Tentang FINLAB</a></li>
                             <li><a href="/artikels" class="hover:text-blue-400">Artikel</a></li>
                             <li><a href="/courses" class="hover:text-blue-400">Kursus Mini</a></li>
-                            <li><a href="/contact" class="hover:text-blue-400">Kontak</a></li>
                         </ul>
                     </div>
                 </div>

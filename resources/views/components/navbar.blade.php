@@ -6,7 +6,6 @@
                 <x-nav-link href="/" :active="request()->is('/')">Beranda</x-nav-link>
                 <x-nav-link href="/artikels" :active="request()->is('artikels')" class="protected-link">Artikel</x-nav-link>
                 <x-nav-link href="/courses" :active="request()->is('courses')" class="protected-link">Kursus Mini</x-nav-link>
-                <x-nav-link href="/budget" :active="request()->is('budget')" class="protected-link">Simulasi Anggaran</x-nav-link>
                 @auth
                     <a href="{{ route('profile') }}" class="flex items-center text-gray-600 hover:text-yellow-600">
                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
@@ -15,7 +14,6 @@
                         {{ Auth::user()->name }}
                     </a>
                 @else
-                    <x-nav-link href="/contact" :active="request()->is('contact')" class="protected-link">Kontak</x-nav-link>
                     <x-nav-link href="/signup" :active="request()->is('signup')" class="border border-yellow-600 text-yellow-600 px-4 py-2 rounded-lg hover:bg-yellow-600 hover:text-yellow-50 transition-colors">Daftar</x-nav-link>
                 @endauth
             </div>
@@ -32,8 +30,6 @@
                 <x-nav-link href="/" :active="request()->is('/')">Beranda</x-nav-link>
                 <x-nav-link href="/artikels" :active="request()->is('artikels*')" class="protected-link">Artikel</x-nav-link>
                 <x-nav-link href="/courses" :active="request()->is('courses')" class="protected-link">Kursus Mini</x-nav-link>
-                <x-nav-link href="/budget" :active="request()->is('budget')" class="protected-link">Simulasi Anggaran</x-nav-link>
-                <x-nav-link href="/contact" :active="request()->is('contact')" class="protected-link">Kontak</x-nav-link>
                 @auth
                     <x-nav-link href="{{ route('profile') }}">{{ Auth::user()->name }}</x-nav-link>
                 @else

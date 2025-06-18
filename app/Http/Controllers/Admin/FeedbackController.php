@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Quiz;
-use App\Models\User;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -15,7 +13,16 @@ class FeedbackController extends Controller
     {
         $course = Course::where('slug', $slug)->firstOrFail();
         $quizzes = $course->quizzes;
-        return view('feedback', compact('course', 'quizzes'));
+
+        /** @var \App\Models\User|null $user */
+        $user = Auth::user();
+        $completed = in_array($course->id, $user?->completed_quizzes ?? []);
+
+        return view('feedback', [
+            'course' => $course,
+            'quizzes' => $quizzes,
+            'sudahDikerjakan' => $completed,
+        ]);
     }
 
     public function submitFeedback(Request $request, $slug)
@@ -26,19 +33,12 @@ class FeedbackController extends Controller
             'q3' => 'required|in:a,b,c,d',
             'q4' => 'required|in:a,b,c,d',
             'q5' => 'required|in:a,b,c,d',
-        ], [
-            'q1.required' => 'Soal 1 wajib dijawab.',
-            'q2.required' => 'Soal 2 wajib dijawab.',
-            'q3.required' => 'Soal 3 wajib dijawab.',
-            'q4.required' => 'Soal 4 wajib dijawab.',
-            'q5.required' => 'Soal 5 wajib dijawab.',
         ]);
 
         $course = Course::where('slug', $slug)->firstOrFail();
         $quizzes = $course->quizzes->take(5);
         $correctAnswers = 0;
 
-        // Periksa jawaban
         foreach ($quizzes as $index => $quiz) {
             $answerKey = 'q' . ($index + 1);
             if ($request->input($answerKey) === $quiz->correct_answer) {
@@ -46,7 +46,6 @@ class FeedbackController extends Controller
             }
         }
 
-        // Hitung poin berdasarkan tingkat kesulitan
         $pointsPerCorrect = match ($course->tingkat_kesulitan) {
             'pemula' => 2,
             'menengah' => 3,
@@ -55,14 +54,22 @@ class FeedbackController extends Controller
         };
         $totalPoints = $correctAnswers * $pointsPerCorrect;
 
-        // Tambahkan poin ke pengguna
-        /** @var User $user */
+        /** @var \App\Models\User|null $user */
         $user = Auth::user();
         if ($user) {
-            $user->points += $totalPoints;
+            $user->points = ($user->points ?? 0) + $totalPoints;
+
+            $completed = $user->completed_quizzes ?? [];
+            if (!in_array($course->id, $completed)) {
+                $completed[] = $course->id;
+                $user->completed_quizzes = $completed;
+            }
+
             $user->save();
         }
 
-        return redirect()->route('feedback.show', $slug)->with('success', "Kuis selesai! Anda menjawab $correctAnswers soal dengan benar dan mendapatkan $totalPoints poin.");
+        return redirect()
+            ->route('course.show', $slug)
+            ->with('success', "Kuis selesai! Anda menjawab $correctAnswers soal benar dan mendapat $totalPoints poin.");
     }
 }

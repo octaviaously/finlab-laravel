@@ -78,3 +78,14 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::resource('admin/quizzes', QuizController::class)->names('admin.quizzes');
     Route::resource('admin/quiz_options', QuizOptionController::class)->names('admin.quiz_options');
 });
+
+Route::prefix('admin')->middleware(['auth:admin'])->group(function () {
+    Route::get('/quizzes', [QuizController::class, 'index'])->name('admin.quizzes.index');
+    Route::get('/quizzes/create', [QuizController::class, 'create'])->name('admin.quizzes.create');
+    Route::post('/quizzes', [QuizController::class, 'store'])->name('admin.quizzes.store');
+    Route::get('/quizzes/{course}', [QuizController::class, 'show'])->name('admin.quizzes.show');
+    Route::get('/quizzes/{quiz}/edit', [QuizController::class, 'edit'])->name('admin.quizzes.edit');
+    Route::put('/quizzes/{quiz}', [QuizController::class, 'update'])->name('admin.quizzes.update');
+    Route::delete('/quizzes/{course}', [QuizController::class, 'destroy'])->name('admin.quizzes.destroy');
+    Route::delete('/quizzes/one/{quiz}', [QuizController::class, 'destroyOne'])->name('admin.quizzes.destroyOne');
+});

@@ -44,10 +44,11 @@
         @endif
 
         @if (session('success'))
-            <div class="mt-6 bg-green-100 p-4 rounded-lg text-green-700">
-                {{ session('success') }}
-            </div>
-        @endif
+<script>
+    alert(@json(session('success')));
+</script>
+@endif
+
     </div>
 
     <script>

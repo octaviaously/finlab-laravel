@@ -12,6 +12,11 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if (session('error'))
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
         @if ($errors->any())
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
                 <ul>
@@ -19,11 +24,6 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            </div>
-        @endif
-        @if (session('error'))
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                {{ session('error') }}
             </div>
         @endif
         <table class="min-w-full bg-white shadow-md rounded-lg">
@@ -35,20 +35,24 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($courses as $course)
+                @forelse ($courses as $course)
                     <tr>
                         <td class="py-3 px-6">{{ $course->judul }}</td>
                         <td class="py-3 px-6">{{ $course->quizzes->count() }}</td>
                         <td class="py-3 px-6">
-                            <a href="{{ route('admin.quizzes.edit', $course->id) }}" class="text-blue-600 hover:underline mr-2">Edit</a>
+                            <a href="{{ route('admin.quizzes.show', $course->id) }}" class="text-blue-600 hover:underline mr-2">Lihat & Edit Kuis</a>
                             <form action="{{ route('admin.quizzes.destroy', $course->id) }}" method="POST" class="inline">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Yakin ingin menghapus semua kuis untuk kursus ini?')">Hapus</button>
+                                <button type="submit" class="text-red-600 hover:underline" onclick="return confirm('Yakin ingin menghapus semua kuis untuk kursus {{ $course->judul }}?')">Hapus Semua Kuis</button>
                             </form>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="3" class="py-3 px-6 text-center">Belum ada kuis yang dibuat.</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
     </div>
